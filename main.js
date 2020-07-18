@@ -72,6 +72,7 @@ class Broadcaster extends WebSocket.Server {
 let server;
 let explorer;
 async function startExplorer() {
+	logger.info("Starting Explorer...")
 	explorer = new Explorer();
 
 	// Application headers
@@ -113,6 +114,7 @@ async function startExplorer() {
 		server = http.createServer(explorer.getApp());
 	}
 	const broadcaster = new Broadcaster(server);
+	logger.info("Initializing Explorer...");
 	await explorer.initialize(broadcaster);
 	explorer.getApp().use(express.static(path.join(__dirname, 'client/build')));
 

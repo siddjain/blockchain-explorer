@@ -99,7 +99,7 @@ class Explorer {
 		);
 
 		for (const pltfrm of explorerconfig[explorer_const.PLATFORMS]) {
-			const platform = await PlatformBuilder.build(
+			const platform = PlatformBuilder.build(
 				pltfrm,
 				this.persistence,
 				broadcaster

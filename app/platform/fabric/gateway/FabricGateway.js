@@ -91,21 +91,26 @@ class FabricGateway {
 			const walletPath = path.join(process.cwd(), this.FSWALLET);
 			this.wallet = await Wallets.newFileSystemWallet(walletPath);
 			// Check to see if we've already enrolled the admin user.
-			identity = await this.wallet.get(this.fabricConfig.getAdminUser());
+			const adminUser = this.fabricConfig.getAdminUser();
+			if (!adminUser) {
+				throw new ExplorerError("could not get admin user from config");
+			}
+			logger.info(`getting identity for ${adminUser}`);
+			identity = await this.wallet.get(adminUser);
 			if (identity) {
 				logger.debug(
-					`An identity for the admin user: ${this.fabricConfig.getAdminUser()} already exists in the wallet`
+					`An identity for the admin user: ${adminUser} already exists in the wallet`
 				);
 			} else {
 				/*
-				 * Identity credentials to be stored in the wallet
-				 * Look for signedCert in first-network-connection.json
+				 * Identity credentials to be stored in the wallet				 
 				 */
-				identity = this.enrollUserIdentity(
-					this.fabricConfig.getAdminUser(),
+				identity = await this.enrollUserIdentity(
+					adminUser,
 					signedCertPath,
 					adminPrivateKeyPath
 				);
+				logger.debug("enrolled ${adminUser}");
 			}
 
 			if (!this.tlsEnable) {

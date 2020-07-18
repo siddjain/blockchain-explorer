@@ -1,6 +1,8 @@
 
 <!-- (SPDX-License-Identifier: CC-BY-4.0) -->  <!-- Ensure there is a newline before, and after, this line -->
 
+This is a fork of `hyperledger/blockchain-explorer` v1.1.0
+
 # Hyperledger Explorer [![join the chat][rocketchat-image]][rocketchat-url]
 
 [rocketchat-url]:https://chat.hyperledger.org/channel/hyperledger-explorer

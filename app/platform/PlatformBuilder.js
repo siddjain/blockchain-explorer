@@ -22,7 +22,7 @@ class PlatformBuilder {
 	 * @returns
 	 * @memberof PlatformBuilder
 	 */
-	static async build(pltfrm, persistence, broadcaster) {
+	static build(pltfrm, persistence, broadcaster) {
 		if (pltfrm === explorer_const.PLATFORM_FABRIC) {
 			const Platform = require('./fabric/Platform');
 			const platform = new Platform(persistence, broadcaster);
